@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.produce.mapper.nwlbill.NwlBillEntryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="nwlBillEntryVo" type="com.zy.produce.vo.nwlbill.NwlBillEntryVo"/>
+
+    <!-- 通用查询结果列 -->
+    <sql id="baseColumn">
+        nbe.id,   <!-- 主键id -->
+        nbe.fid,   <!-- 多表单据id -->
+        nbe.qty    <!-- 数量 -->
+    </sql>
+
+
+    <!-- 多单据明细列表 -->
+    <select id="entryList" resultMap="nwlBillEntryVo">
+        SELECT <include refid="baseColumn"/>
+
+        FROM nwl_bill_entry nbe <!-- 多单据明细表 -->
+        <where>
+            nbe.fid = #{fid}
+        </where>
+        ORDER BY nbe.id
+    </select>
+
+</mapper>

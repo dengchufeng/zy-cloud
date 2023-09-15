@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: xxx # nacos服务器地址
+  config:
+    import:
+      - nacos:zy-management-common-prod.yaml # 通用配置文件
+      - nacos:zy-monitor-prod.yaml           # 当前项目配置文件

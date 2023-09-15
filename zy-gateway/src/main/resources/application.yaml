@@ -1,0 +1,10 @@
+spring:
+  # 运行环境
+  profiles:
+    active: local
+  # 应用名称
+  application:
+    name: zy-gateway
+# 获取pom文件的属性
+pom:
+  version: ${project.version} # 项目版本号

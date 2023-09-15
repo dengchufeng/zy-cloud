@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.base.mapper.nwlbase.NwlBaseMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="nwlBaseSearchVo" type="com.zy.base.entity.nwlbase.NwlBase"/>
+
+    <!-- 通用查询结果列 -->
+    <sql id="baseColumn">
+        nb.id,   <!-- 主键id -->
+        nb.fcode,   <!-- 编码 -->
+        nb.fname,   <!-- 名称 -->
+        nb.bill_status,   <!-- 单据状态（A：创建，C：审核） -->
+        nb.creator,   <!-- 创建人 -->
+        nb.create_date,   <!-- 创建日期 -->
+        nb.modifier,   <!-- 修改人 -->
+        nb.modify_date,   <!-- 修改日期 -->
+        nb.auditor,   <!-- 审核人 -->
+        nb.audit_date    <!-- 审核日期 -->
+    </sql>
+
+
+    <!-- 单测试列表 -->
+    <select id="nwlBaseList" resultMap="nwlBaseSearchVo">
+        SELECT <include refid="baseColumn"/>
+
+        FROM nwl_base nb <!-- 单测试表 -->
+        <where>
+            <if test="search.id != null and search.id != ''">
+                AND nb.id = #{search.id}
+            </if>
+            <if test="search.fcode != null and search.fcode != ''">
+                AND nb.fcode LIKE '%${search.fcode}%'
+            </if>
+            <if test="search.fname != null and search.fname != ''">
+                AND nb.fname LIKE '%${search.fname}%'
+            </if>
+            <if test="search.billStatus != null and search.billStatus != ''">
+                AND nb.bill_status = #{search.billStatus}
+            </if>
+        </where>
+        ORDER BY nb.id DESC
+    </select>
+
+</mapper>

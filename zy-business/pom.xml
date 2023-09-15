@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zy-cloud</artifactId>
+        <groupId>com.zy</groupId>
+        <version>1.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- 当前项目版本：会引用父工程的groupId和version，除非需要自定义，否则不需要重复写 -->
+    <artifactId>zy-business</artifactId>
+    <packaging>pom</packaging>
+
+    <!-- 子模块 -->
+    <modules>
+        <module>zy-base</module>
+        <module>zy-produce</module>
+    </modules>
+
+</project>

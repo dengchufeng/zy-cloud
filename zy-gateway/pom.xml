@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>zy-cloud</artifactId>
+        <groupId>com.zy</groupId>
+        <version>1.0.1</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--当前项目版本：会引用父工程的groupId和version，除非需要自定义，否则不需要重复写-->
+    <artifactId>zy-gateway</artifactId>
+
+    <!-- 依赖引用 -->
+    <dependencies>
+        <!-- gateway网关 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <!-- SpringCloud Loadbalancer（gateway需要引入loadbalancer）-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+        <!-- 添加caffeine缓存：Loadbalancer的缓存 -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+        <!-- gRPC：此版本gateway需要引入这个依赖 -->
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty</artifactId>
+            <version>${grpc-netty.version}</version>
+        </dependency>
+        <!-- actuator指标监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!-- nacos-discovery服务发现 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!-- nacos-config配置中心 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <!-- Logback版本不兼容，处理nacos警告：具体看根目录的pom -->
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>logback-adapter</artifactId>
+        </dependency>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- zy-common-pure不依赖第三方maven包的纯净版通用项目 -->
+        <dependency>
+            <groupId>com.zy</groupId>
+            <artifactId>zy-common-pure</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

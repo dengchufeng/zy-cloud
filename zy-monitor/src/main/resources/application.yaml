@@ -1,0 +1,18 @@
+spring:
+  # 运行环境
+  profiles:
+    active: local
+  # 应用名称
+  application:
+    name: zy-monitor
+  # 关闭模块检查
+  thymeleaf:
+    check-template-location: false
+#  boot:
+#    admin:
+#      ui:
+#        public-url: http://188.188.3.220:20238/${spring.boot.admin.context-path}
+#      context-path: /monitor
+# 获取pom文件的属性
+pom:
+  version: ${project.version} # 项目版本号

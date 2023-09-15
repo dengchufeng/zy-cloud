@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zy.produce.mapper.nwlbill.NwlBillMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="nwlBillSearchVo" type="com.zy.produce.entity.nwlbill.NwlBill"/>
+
+    <!-- 通用查询结果列 -->
+    <sql id="baseColumn">
+        nb.id,   <!-- 主键id -->
+        nb.bill_no,   <!-- 单据编号 -->
+        nb.bill_status,   <!-- 单据状态（A：创建，C：审核） -->
+        nb.creator,   <!-- 创建人 -->
+        nb.create_date,   <!-- 创建日期 -->
+        nb.modifier,   <!-- 修改人 -->
+        nb.modify_date,   <!-- 修改日期 -->
+        nb.auditor,   <!-- 审核人 -->
+        nb.audit_date,   <!-- 审核日期 -->
+        nb.customer_po,   <!-- 客户PO -->
+        nb.remark    <!-- 备注 -->
+    </sql>
+
+
+    <!-- 多单据列表 -->
+    <select id="nwlBillList" resultMap="nwlBillSearchVo">
+        SELECT <include refid="baseColumn"/>
+
+        FROM nwl_bill nb <!-- 多单据表 -->
+        <where>
+            <if test="search.id != null and search.id != ''">
+                AND nb.id = #{search.id}
+            </if>
+            <if test="search.billStatus != null and search.billStatus != ''">
+                AND nb.bill_status = #{search.billStatus}
+            </if>
+        </where>
+        ORDER BY nb.id DESC
+    </select>
+
+</mapper>

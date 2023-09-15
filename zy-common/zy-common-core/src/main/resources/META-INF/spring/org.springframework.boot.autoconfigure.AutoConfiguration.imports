@@ -1,0 +1,4 @@
+com.zy.common.core.controller.VersionController
+com.zy.common.core.handler.GlobalExceptionHandler
+com.zy.common.core.config.MybatisPlusConfig
+com.zy.common.core.handler.MybatisMetaObjectHandler

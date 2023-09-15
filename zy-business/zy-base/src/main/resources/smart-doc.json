@@ -1,0 +1,9 @@
+{
+  "outPath": "F://smart-doc//zy-base",                 // 指定文档的输出路径
+  "projectName": "zy-base项目接口文档",                   // 配置自己的项目名称
+  "appToken": "xxxx",   // torna模块Token
+  "openUrl": "xxxx",        // torna平台地址，填写自己的私有化部署地址
+  "replace": true,                                  // 推送torna时替换旧的文档
+  // controller包过滤，只加载下面指定的包，多个包用英文逗号隔开，2.2.2开始需要采用正则：com.test.controller.*
+  "packageFilters": "com.zy.base.controller.*"
+}

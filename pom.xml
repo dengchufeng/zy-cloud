@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.zy</groupId>
+    <artifactId>zy-cloud</artifactId>
+    <version>1.0.1</version>
+    <packaging>pom</packaging>
+
+    <!-- 子模块 -->
+    <modules>
+        <module>zy-common</module>
+        <module>zy-gateway</module>
+        <module>zy-business</module>
+        <module>zy-monitor</module>
+    </modules>
+
+    <!-- 指定依赖版本 -->
+    <properties>
+        <!-- 项目版本号 -->
+        <zy-cloud.version>1.0.1</zy-cloud.version>
+        <!-- jdk -->
+        <java.version>17</java.version>
+        <!-- 源码编译格式 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- SpringBoot -->
+        <spring-boot.version>3.0.9</spring-boot.version>
+        <!-- SpringBoot Admin监控 -->
+        <spring-boot-admin.version>3.1.6</spring-boot-admin.version>
+        <!-- SpringCloud -->
+        <spring-cloud.version>2022.0.4</spring-cloud.version>
+        <!-- SpringCloud Alibaba -->
+        <spring-cloud-alibaba.version>2022.0.0.0</spring-cloud-alibaba.version>
+        <!-- mybatis-plus -->
+        <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
+        <!-- druid连接池 -->
+        <druid.boot3.version>1.2.18</druid.boot3.version>
+        <!-- 动态数据源 -->
+        <dynamic-datasource.boot3.version>4.1.3</dynamic-datasource.boot3.version>
+        <!-- mysql -->
+        <mysql.version>8.0.33</mysql.version>
+        <!-- maven编译 -->
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <!-- maven测试管理 -->
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <!-- knife4j集成swagger -->
+        <knife4j.version>4.3.0</knife4j.version>
+        <!-- smart-doc -->
+        <smart-doc.version>2.7.4</smart-doc.version>
+        <!-- gRPC：此版本gateway需要引入这个依赖 -->
+        <grpc-netty.version>1.56.1</grpc-netty.version>
+        <!-- Logback版本不兼容，处理nacos警告：Load Logback Configuration of Nacos fail, message: Could not initialize Logback Nacos logging from classpath:nacos-logback.xml -->
+        <logback-adapter.version>1.0.0</logback-adapter.version>
+    </properties>
+
+    <!-- 依赖声明 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringBoot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- SpringCloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- SpringCloud Alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- mybatis-plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- druid连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-3-starter</artifactId>
+                <version>${druid.boot3.version}</version>
+            </dependency>
+            <!-- 动态数据源 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>dynamic-datasource-spring-boot3-starter</artifactId>
+                <version>${dynamic-datasource.boot3.version}</version>
+            </dependency>
+            <!-- mysql -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- knife4j集成swagger -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- logback-adapter -->
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>logback-adapter</artifactId>
+                <version>${logback-adapter.version}</version>
+            </dependency>
+            <!-- zy-common-core核心包 -->
+            <dependency>
+                <groupId>com.zy</groupId>
+                <artifactId>zy-common-core</artifactId>
+                <version>${zy-cloud.version}</version>
+            </dependency>
+            <!-- zy-common-pure不依赖第三方maven包的纯净版通用项目 -->
+            <dependency>
+                <groupId>com.zy</groupId>
+                <artifactId>zy-common-pure</artifactId>
+                <version>${zy-cloud.version}</version>
+            </dependency>
+            <!-- zy-common-redis -->
+            <dependency>
+                <groupId>com.zy</groupId>
+                <artifactId>zy-common-redis</artifactId>
+                <version>${zy-cloud.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <resources>
+            <!-- maven打包需要包括如下文件（把xml文件移到src/main/java目录里也需要配置下面这段代码）-->
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <!-- Maven 构建过程中对指定的资源文件进行过滤处理。过滤处理是指将资源文件中的占位符替换为实际的值，通常用于动态配置应用程序 -->
+            <resource>
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/application*.yml</include>
+                    <include>**/application*.yaml</include>
+                    <include>**/application*.properties</include>
+                    <include>**/*.xml</include>
+                    <include>**/META-INF/**</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- maven编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <!-- 处理springframework警告（具体原因可查阅：https://github.com/spring-projects/spring-framework/pull/29531）：
+                         Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: clazz.getName() -->
+                    <compilerArgs>
+                        <compilerArg>-parameters</compilerArg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <!-- 打包跳过测试 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+        <!-- 插件声明 -->
+        <pluginManagement>
+            <plugins>
+                <!-- SpringBoot打包插件 -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <!-- <executions>元素定义了插件的执行配置。在这里，我们定义了一个execution（执行），它的id是repackage，表示执行的类型是重新打包。 -->
+                    <!-- <goals>元素指定了要运行的目标（goal），在这里我们只有一个目标repackage，表示重新打包为可执行的JAR。 -->
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- smart-doc生成文档maven插件 -->
+                <plugin>
+                    <groupId>com.github.shalousun</groupId>
+                    <artifactId>smart-doc-maven-plugin</artifactId>
+                    <version>${smart-doc.version}</version>
+                    <configuration>
+                        <!--指定生成文档的使用的配置文件,配置文件放在自己的项目中-->
+                        <configFile>src/main/resources/smart-doc.json</configFile>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
